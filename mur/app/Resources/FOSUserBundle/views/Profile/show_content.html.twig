@@ -1,0 +1,53 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+{% trans_default_domain 'FOSUserBundle' %}
+<div class="container">
+    <div class="row" style="margin-top:40px;">
+    	<div id="entete" class="span12">
+        	<h2>Mes informations <i class="icon-user"></i></h2>
+        	<div class="span3">
+        		{% include 'UtilisateursBundle:Modules:utilisateurConnecte.html.twig' %}
+        	</div>
+			<div class="liens span4 paddingBottom bords">
+				<h4>Mes informations</h4>
+				{% set sexe = '' %}
+    			{% if user.civilite == '0' %}
+    				{% set sexe = 'Mr' %}
+    			{% else %}
+    				{% set sexe = 'Mme' %}
+    			{% endif %}
+    			<p><strong>{{ 'Civilité'|trans }} :</strong> {{ sexe }}</p>
+				<p><strong>{{ 'profile.show.username'|trans }} :</strong> {{ user.username }}</p>
+    			<p><strong>{{ 'profile.show.email'|trans }} :</strong> {{ user.email }}</p>
+    			<p><strong>{{ 'Téléphone'|trans }} :</strong> {{ user.telephone }}</p>
+    			<p><strong>{{ 'Nom'|trans }} :</strong> {{ user.nom }}</p>
+    			<p><strong>{{ 'Prénom'|trans }} :</strong> {{ user.prenom }}</p>
+    			<p><strong>{{ 'Adresse'|trans }} :</strong> {{ user.adresse }}</p>
+    			<p><strong>{{ 'Code postal'|trans }} :</strong> {{ user.codePostal }}</p>
+    			<p><strong>{{ 'Ville'|trans }} :</strong> {{ user.ville }}</p>
+    			<p id="paysCountry"></p>
+    			<div style="display:none" id="userPays">{{ user.pays }}</div>
+    			<form name="profilEdition">
+    				<div style="display:none">{{ form_widget(form) }}</div>
+    			</form>
+    			<script>
+    				for(var i=0; i<document.forms['profilEdition'].elements[0].options.length; i++) {
+    					if(document.forms['profilEdition'].elements[0].options[i].value == document.getElementById('userPays').innerHTML) {
+    						document.forms['profilEdition'].elements[0].selectedIndex =i;
+    					}
+    				}
+					document.getElementById('paysCountry').innerHTML = '<strong>Pays :</strong> ' + document.forms['profilEdition'].elements[0].options[document.forms['profilEdition'].elements[0].selectedIndex].text;
+				</script>
+			</div>
+		</div>
+    </div>
+</div>
+<script src="{{ asset('js/jquery-2.1.4/jquery-2.1.4.min.js') }}"></script>
+<script src="{{ asset('js/bootstrap.js') }}"></script>
+<script>
+	$(document).ready(function() {
+		$('#recherche').css({height:'30px', width:'163px'});
+		$('#boutonRecherche').css('height','30px');
+	});
+</script>
+{% endblock %}

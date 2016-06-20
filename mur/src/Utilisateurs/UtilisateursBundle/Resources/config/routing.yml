@@ -1,0 +1,18 @@
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    
+membre_connexion:
+    path:     /connexion
+    defaults: { _controller: UtilisateursBundle:Connexion:appelConnexion }
+    
+membre_inscription:
+    path:     /inscription
+    defaults: { _controller: UtilisateursBundle:Inscription:appelInscription }
+    
+membre_confirmation:
+    path:     /confirmation
+    defaults: { _controller: UtilisateursBundle:Redirection:retour }
+    
+membre_finConfirmation:
+    path:     /finConfirmation
+    defaults: { _controller: UtilisateursBundle:Redirection:fin }

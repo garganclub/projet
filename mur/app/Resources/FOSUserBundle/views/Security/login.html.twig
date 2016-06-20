@@ -1,0 +1,60 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+{% trans_default_domain 'FOSUserBundle' %}
+{% block fos_user_content %}
+{% if error %}
+	<div id="connexioninvalideaccesrefuse" style="display:inline-block;">
+		<h2 style="background:#FFFFFF;">Erreur <i class="icon-thumbs-down"></i></h2>
+		<div class="liens bords" style="display:inline-block; text-align:center; padding:0px 10px 30px 10px; background:#FFFFFF;">
+			<br/>
+			<div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+		</div>
+	</div>
+	<br/><br/>
+{% endif %}
+	<script>
+		function fermerConnexion() {
+			document.getElementById('conteneurInsertConnexion').style.display = 'none';
+		}
+	</script>
+	<div id="insert" style="background:#CCF; display:inline-block; padding:20px;" class="liens bords">
+		<div style="text-align:left; padding:0px;"><i class="icon-remove" style="cursor:pointer;" onclick="fermerConnexion()"></i></div><br/>
+		<h2>Connexion <i class="icon-unlock-alt"></i></h2><br/><br/>
+		<form id="formulaire" action="{{ path('fos_user_security_check') }}" method="post">
+			<input type="hidden" id="csrf_token" name="_csrf_token" value="{{ csrf_token }}" />
+			PSEUDO :<br/>
+			<input type="text" id="username" name="_username" style="margin: 10px;" required="required"/><br/>
+			MOT de PASSE :<br/>
+			<input type="password" id="password" name="_password" style="margin: 10px;" required="required"/><br/>
+			<br/>
+			<div class="wrapper" style="margin-left: -20px;">
+				<div class="parent"">
+					<input type="submit" style="margin-top: 20px;" class="bouzin boutonMiroir children pull-right" id="_submit" name="_submit" value="VALIDER"/>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script>
+		$(document).ready(function() {
+			var form = $('#formulaire');
+			form.submit(function() {
+				$.ajax({
+					type: 'POST',
+					url: "{{ path('fos_user_security_check') }}",
+					data: form.serialize(),
+					error: function(jqXHR, textStatus, errorThrown) {
+						$('#infosConnexion').html('Erreur...');
+					},
+					success: function(htmlResponse) {
+						if(htmlResponse.match(/connexioninvalideaccesrefuse/) != 'connexioninvalideaccesrefuse') {
+							location.href=$('#localisation').val();
+						}
+						else {
+							$('#cibleConnexion').html(htmlResponse);
+						}
+					}
+				});			
+				return false;
+			});
+		});
+	</script>
+{% endblock fos_user_content %}

@@ -1,0 +1,26 @@
+<div class="liens paddingRight bords" style="display:inline-block">
+	<br/>
+	<table>
+		<tr>
+			{% set compteur = 0 %}
+			{% for entity in entities %}
+				{% if ((compteur % 4 == 0) and (compteur != 0)) %}
+					</tr><tr>
+				{% endif %}
+					<td>
+						<div id="DIV{{ compteur }}" style="width:110px; height:80px; line-height:80px; text-align:center;">
+							<div style="height:150%; display:inline-block; vertical-align:middle;"></div>
+							<div style="display:inline-block; vertical-align:middle;">
+								<img id="img{{ compteur }}" name="{{ entity.adresse }}" class="drag" src="{{ ('uploads/'~entity.adresse)|imagine_filter('miniature') }}"/>
+							</div>
+						</div>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					</td>
+				{% set compteur = compteur + 1 %}
+			{% endfor %}
+		</tr>
+	</table>	
+</div>
+<div class="navigation">
+	{{ knp_pagination_render(entities) }}
+</div>

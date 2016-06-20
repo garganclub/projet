@@ -1,0 +1,7 @@
+index_mur:
+    path:     /mur
+    defaults: { _controller: "ImagesBundle:Images:mur" }
+
+ImagesBundle_images:
+    resource: "@ImagesBundle/Resources/config/routing/image.yml"
+    prefix:   membre/images

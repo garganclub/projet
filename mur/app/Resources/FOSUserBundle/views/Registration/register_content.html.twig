@@ -1,0 +1,97 @@
+{% trans_default_domain 'FOSUserBundle' %}
+<script>
+	function fermerInscription() {
+		document.getElementById('conteneurInsertInscription').style.display = 'none';
+	}
+</script>
+<div id="insertInscription" style="background:#CCF; display:inline-block; padding:20px;" class="liens bords">
+	<div style="text-align:left; padding:0px;"><i class="icon-remove" style="cursor:pointer;" onclick="fermerInscription()"></i></div><br/>
+		<h2>Inscription <i class="icon-signin"></i></h2>
+		<br/><br/>
+		{{ form_start(form, {'method': 'post', 'action': path('fos_user_registration_register'), 'attr': {'class': 'fos_user_registration_register', 'id': 'formulaireInscription'}}) }}
+			<div style="text-align:center; margin:0px 10px 0px 10px;">
+				<div style="display:inline-block; margin:0px 20px 0px 0px;">
+					CIVILITÉ :<br/>
+					<div style="display:inline-block; margin-bottom:20px;">
+						Mr {{ form_widget(form.civilite['0']) }}&nbsp;&nbsp;
+						Mme {{ form_widget(form.civilite['1']) }}
+					</div>
+					<br/>
+					<div>
+						{{ form_errors(form.username) }}
+						{{ form_label(form.username) }}
+						{{ form_widget(form.username) }}
+					</div>			
+					{{ form_widget(form.plainPassword) }}
+					<div>
+						{{ form_errors(form.email) }}
+						{{ form_label(form.email) }}
+						{{ form_widget(form.email) }}
+					</div>
+					<div>
+						TÉLÉPHONE :<br/>
+						{{ form_widget(form.telephone) }}
+					</div>
+					<div>
+						{{ form_widget(form.valide) }}
+						<input type="hidden" id="position" name="position" value="Session Encularium"/>
+					</div>
+				</div>
+				<div style="display:inline-block; margin:0px 0px 0px 10px;">
+					<div>
+						NOM :<br/>
+						{{ form_widget(form.nom) }}<br/>
+					</div>
+					<div>
+						PRÉNOM :<br/>
+						{{ form_widget(form.prenom) }}<br/>
+					</div>
+					<div>
+						ADRESSE :<br/>
+						{{ form_widget(form.adresse) }}<br/>
+					</div>
+					<div>
+						CODE POSTAL :<br/>
+						{{ form_widget(form.codePostal) }}<br/>
+					</div>
+					<div>
+						VILLE :<br/>
+						{{ form_widget(form.ville) }}<br/>
+					</div>
+					<div>
+						PAYS :<br/>
+						{{ form_widget(form.pays) }}<br/>
+					</div>
+				</div>
+			</div>
+			<br/>
+			<div class="wrapper" style="margin-left: -20px;">
+				<div class="parent"">
+					<input type="submit" style="margin-top: 20px;" class="bouzin boutonMiroir children pull-right" id="_submit" name="_submit" value="VALIDER"/>
+				</div>
+			</div>
+		{{ form_end(form) }}
+	</div>
+</div>
+<script>
+	//document.getElementById('position').value = document.getElementById('localisation').value;
+	$(document).ready(function() {
+		//$('#position').attr('value', $('#localisation').val());
+		var form = $('#formulaireInscription');
+		form.submit(function() {
+			$('#position').attr('value', $('#localisation').val());
+			$.ajax({
+				type: 'POST',
+				url: "{{ path('fos_user_registration_register') }}",
+				data: form.serialize(),
+				error: function(jqXHR, textStatus, errorThrown) {
+					$('#infosInscription').html('Erreur...');
+				},
+				success: function(htmlResponse) {
+					$('#cibleInscription').html(htmlResponse);
+				}
+			});		
+			return false;
+		});
+	});
+</script>

@@ -1,0 +1,14 @@
+images:
+    resource: "@ImagesBundle/Resources/config/routing.yml"
+    prefix:   /
+
+accueil:
+    resource: "@AccueilBundle/Resources/config/routing.yml"
+    prefix:   /
+
+utilisateurs:
+    resource: "@UtilisateursBundle/Resources/config/routing.yml"
+    prefix:   /
+
+_liip_imagine:
+    resource: "@LiipImagineBundle/Resources/config/routing.xml"

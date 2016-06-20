@@ -1,0 +1,196 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+	<div id="entete" style="margin-top:50px;">
+		<h1 style="margin-left:40px">Bombage <i class="icon-cloud"></i></h1>
+		<input type="hidden" id="localisation" name="localisation" value="{{ app.request.uri }}"/>
+	</div>
+	<style>
+		.drag:hover  { cursor: grab; }
+		.drag:active  { cursor: grabbing; }
+	</style>
+	<script>
+		function fermer() {
+			document.getElementById('voir').style.display = 'none';
+		}
+	</script>
+	<div id="voir" style="z-index:100; position:absolute; top:60px; width:100%; text-align:center;">
+		<div id="vue">
+		</div>
+	</div>
+	<div class="container">
+		<div class="row">
+			<div id="entete" class="span12">
+				<h2>Écrire sur le mur <i class="icon-pushpin"></i></h2>
+				<div id="pageIcones" style="display:inline-block; vertical-align:top;">
+					<script>
+						function ajaxPaginator(cible) {
+							$.ajax({
+								type: "GET",
+								url: "{{ path('icones_bombage') }}",
+								data: {page: cible.attr('data-info')},
+								success: function(returnData){
+									$('#pageIcones').html(returnData['html']);
+									dragDrop();
+								}
+							});
+						}
+						$(document).ready(function() {
+							$.ajax({
+								type: "GET",
+								url: "{{ path('icones_bombage') }}",
+								success: function(returnData){
+									$('#pageIcones').html(returnData['html']);
+									dragDrop();
+								}
+							});
+						});
+					</script>
+				</div>
+				<div id="conteneur" class="bords" style="display:inline-block; vertical-align:top; width:490px; height:266px; padding:20px;">
+					<form id="formulaire" action="{{ path('vue_ajax') }}" method="post">
+						<div style="display:inline-block;">
+							<div id="reception" class="bords" style="display:inline-block; vertical-align:top; width:130px; height:130px; text-align:center; padding:20px; margin-right:20px; margin-bottom:12px;">
+								déposer une image...
+							</div>
+							<br/>
+							&nbsp;&nbsp;Choisir une police
+							<br/>
+							<select id="selection" style="width:130px; font-size:11px; margin-top:0px;" onchange="change()">
+								<option id="thebattlecont">the battle continuez</option>
+								<option id="adrip1">a dripping marker</option>
+								<option id="big">big</option>
+								<option id="over">over</option>
+							</select>
+							<br/>
+							<input type="button" style="font-size:12px;" onclick="envoi()" value="VALIDER"/>
+						</div>
+						<div id="inscription" class="bords" style="display:inline-block; vertical-align:top; width:290px; height:224px; padding:0px;">
+							<textarea id="ecriture" name="ecriture" placeholder="VOTRE TEXTE..." style="width:246px; height:180px; padding:20px; border-color:transparent;"></textarea>
+						</div>
+						<input id="resultatAdresse" name="resultatAdresse" type="hidden" value=""/>
+						<input id="resultatTexte" name="resultatTexte" type="hidden" value=""/>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		function dragDrop() {
+			var divReception = document.getElementById('reception');
+			while(divReception.firstChild){
+				divReception.removeChild(divReception.firstChild);
+			}
+			adresse = '';
+			divReception.innerHTML = 'déposer une image...';
+		  	for (var i = 0; i < {{ entities|length }}; i++) {
+				document.getElementById('img' + i).ondragstart = function(evt) {
+				  	evt.dataTransfer.setData("id_drg", evt.target.id);
+				  	evt.dataTransfer.effectAllowed = 'link';
+				};
+				document.getElementById('img' + i).ondragend = function(evt) {
+				  	evt.target.style.cursor = 'default';
+				  	evt.target.onmouseover = function() {
+						evt.target.style.cursor = 'grab';
+					};
+					evt.target.onmousedown = function() {
+						evt.target.style.cursor = 'grabbing';
+					};
+				}
+				document.getElementById('DIV' + i).ondragover = function(evt) {
+					evt.preventDefault();
+					evt.dataTransfer.dropEffect = 'link';
+				}
+				document.getElementById('DIV' + i).ondrop = function(evt) {
+					adresse = '';
+					evt.preventDefault();
+					var elt = document.getElementById(evt.dataTransfer.getData("id_drg"));
+					if (evt.target.childNodes.length) {
+						evt.target.appendChild(elt);
+					}
+				}
+		  	}
+			var drp = document.getElementById('reception');  
+			drp.ondragover = function(evt) {
+				evt.preventDefault();
+				evt.dataTransfer.dropEffect = 'link';
+			}	
+			drp.ondrop = function(evt) {
+				if(adresse == '') {
+					document.getElementById('reception').innerHTML = '';
+					evt.preventDefault();
+					var elt = document.getElementById(evt.dataTransfer.getData("id_drg"));
+					evt.target.appendChild(elt);
+					adresse = elt.name;
+				}
+				else {
+					alert('Il y a déjà une image');
+				}
+			}
+		}
+		function change() {
+			switch(document.getElementById('selection').value) {
+				case 'the battle continuez':
+					document.getElementById('ecriture').style.fontFamily = 'thebattlecont';
+					document.getElementById('ecriture').style.fontSize = '30px';
+					break;
+				case 'a dripping marker':
+					document.getElementById('ecriture').style.fontFamily = 'adrip1';
+					document.getElementById('ecriture').style.fontSize = '40px';
+					break;
+				case 'big':
+					document.getElementById('ecriture').style.fontFamily = 'big';
+					document.getElementById('ecriture').style.fontSize = '45px';
+					break;
+				case 'over':
+					document.getElementById('ecriture').style.fontFamily = 'over';
+					document.getElementById('ecriture').style.fontSize = '25px';
+					break;
+			}
+		}
+		function envoi() {
+			var formulaire = document.getElementById('formulaire');
+			var texte = document.getElementById('ecriture').value;
+			if(adresse == '' && texte == '') {
+				alert('Vous n\'avez rien renseigné');
+				document.getElementById('resultatAdresse').value = '';
+				document.getElementById('resultatTexte').value = '';
+			}
+			else {
+				var police = '';
+				var deroulant = document.getElementById('selection');
+				for(i=0;i<4;i++) {
+					if(deroulant[i].selected == true) {
+						police = deroulant[i].id;
+						break;
+					}
+				}
+				var resultatAdresse = '';
+				var resultatTexte = '';
+				if(adresse != '' || texte != '') {
+					if(adresse != '') {
+						resultatAdresse = adresse;
+					}
+					if(texte != '') {
+						resultatTexte = '<div style="display:inline-block; font-size:80px; line-height:85px; font-family:' + police + ';">' + texte + '</div>';
+					}
+				}
+				document.getElementById('resultatAdresse').value = resultatAdresse;
+				document.getElementById('resultatTexte').value = resultatTexte;
+				var form = $('#formulaire');
+				$.ajax({
+					type: 'POST',
+					url: "{{ path('vue_ajax') }}",
+					data: form.serialize(),
+					success: function(htmlResponse) {
+						//alert('succès');
+						document.getElementById('voir').style.display = 'block';
+						$('#vue').html(htmlResponse['html']);
+					}
+				});
+			}
+		}
+		change();
+		var adresse = '';
+		dragDrop();
+	</script>
+{% endblock %}

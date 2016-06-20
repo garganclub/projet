@@ -1,0 +1,23 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+	<div class="container" style="margin-top:40px;">
+		<div class="row">
+			<div id="entete" class="span12">
+				<h2>Importer une nouvelle image <i class="icon-picture"></i></h2>
+				<div class="liens paddingRight paddingBottom bords" style="display:inline-block">
+					<br/>
+					{% for flashMessage in app.session.flashbag.get('error') %}
+						<div class="alert alert-error">{{ flashMessage }}</div>
+					{% endfor %}
+					{% if page is not defined %}
+						{% set page = 1 %}
+					{% endif %}
+					<form action="{{ path('images_create') }}" method="post" {{ form_enctype(form) }}>
+						{{ form(form) }}
+					</form>
+					<a href="{{ path('images') }}">Retour liste</a>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

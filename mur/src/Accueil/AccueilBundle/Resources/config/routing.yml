@@ -1,0 +1,27 @@
+accueil_homepage:
+    path:     /
+    defaults: { _controller: AccueilBundle:Default:index }
+    
+accueil_vue:
+    path:     /vue
+    defaults: { _controller: AccueilBundle:Default:vue }
+    
+vue_ajax:
+    path:     /vueAjax
+    defaults: { _controller: AccueilBundle:Default:vueAjax }
+    
+enregistre_message:
+    path:     /enregistre
+    defaults: { _controller: AccueilBundle:Default:enregistre }
+    
+accueil_bombage:
+    path:     /bombage
+    defaults: { _controller: AccueilBundle:Bombage:bombage }
+
+icones_bombage:
+    path:     /icones
+    defaults: { _controller: AccueilBundle:Bombage:ajax }
+        
+membre_homepage:
+    path:     /membre
+    defaults: { _controller: AccueilBundle:Membre:membre }

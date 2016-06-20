@@ -1,0 +1,432 @@
+@font-face {
+    font-family: 'thebattlecont';
+    src: url('polices/thebattlecont/thebattlecont-webfont.eot');
+    src: url('polices/thebattlecont/thebattlecont-webfont.eot?#iefix') format('embedded-opentype'),
+         url('polices/thebattlecont/thebattlecont-webfont.woff') format('woff'),
+         url('polices/thebattlecont/thebattlecont-webfont.ttf') format('truetype'),
+         url('polices/thebattlecont/thebattlecont-webfont.svg#the_battle_continuezregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'adrip1';
+    src: url('polices/adrip1/adrip1-webfont.eot');
+    src: url('polices/adrip1/adrip1-webfont.eot?#iefix') format('embedded-opentype'),
+         url('polices/adrip1/adrip1-webfont.woff') format('woff'),
+         url('polices/adrip1/adrip1-webfont.ttf') format('truetype'),
+         url('polices/adrip1/adrip1-webfont.svg#a_dripping_markerregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'big';
+    src: url('polices/big/big-webfont.eot');
+    src: url('polices/big/big-webfont.eot?#iefix') format('embedded-opentype'),
+         url('polices/big/big-webfont.woff') format('woff'),
+         url('polices/big/big-webfont.ttf') format('truetype'),
+         url('polices/big/big-webfont.svg#bigmedium') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'over';
+    src: url('polices/over/over-webfont.eot');
+    src: url('polices/over/over-webfont.eot?#iefix') format('embedded-opentype'),
+         url('polices/over/over-webfont.woff') format('woff'),
+         url('polices/over/over-webfont.ttf') format('truetype'),
+         url('polices/over/over-webfont.svg#overregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+::-moz-selection
+{
+    color: rgb(104, 54, 255);
+    color: rgb(255, 255, 104);
+    color: rgb(168, 236, 82);
+    color: rgb(68, 136, 0);
+    color: rgb(230, 110, 13);
+    /*
+    background-color: rgb(104, 54, 255);
+    background-color: rgb(168, 236, 82);
+    background-color: rgb(230, 110, 13);
+    background-color: rgb(255, 255, 104);
+    */
+}
+
+::selection
+{
+    color: rgb(104, 54, 255);
+    color: rgb(255, 255, 104);
+    color: rgb(168, 236, 82);
+    color: rgb(68, 136, 0);
+    color: rgb(230, 110, 13);
+    /*
+    background-color: rgb(104, 54, 255);
+    background-color: rgb(168, 236, 82);
+    background-color: rgb(230, 110, 13);
+    background-color: rgb(255, 255, 104);
+    */
+}
+body {
+  margin: 0;
+  padding-bottom: 40px;
+  padding-top: 60px;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #333333;
+  background-color: #ffffff;
+}
+input.correction {
+  height: 30px;
+}
+a, a:hover {
+  text-decoration: none;
+}
+a.bouton, a.boutonMiroir, a.bouton:hover, a.boutonMiroir:hover, a.bouton:visited, a.boutonMiroir:visited {
+  text-decoration: none;
+  color: #ffffff;
+}
+.ajustement {
+  margin: 0;
+  padding: 0;
+}
+form {
+  margin: 0;
+}
+.bouton {
+  display: inline-block;
+  *display: inline;
+  padding: 4px 12px;
+  margin-bottom: 0;
+  *margin-left: .3em;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #E66E0D;
+  color: #FFFFFF;
+  border: 1px solid #cccccc;
+  *border: 0;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border-bottom-color: #b3b3b3;
+  -webkit-border-top-right-radius: 4px;
+     -moz-border-top-right-radius: 4px;
+          border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+     -moz-border-bottom-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+}
+.boutonMiroir {
+  position: relative;
+  right: -40px;
+}
+.wrapper .parent:hover .boutonMiroir, .boutonMiroir:hover {
+  position: relative;
+  right: -20px;
+}
+.boutonMiroir {
+  display: inline-block;
+  *display: inline;
+  padding: 4px 12px;
+  margin-bottom: 0;
+  *margin-left: .3em;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #E66E0D;
+  color: #FFFFFF;
+  border: 1px solid #cccccc;
+  *border: 0;
+  border-color: #e6e6e6 #e6e6e6 #bfbfbf;
+  border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+  border-bottom-color: #b3b3b3;
+  -webkit-border-top-left-radius: 4px;
+     -moz-border-top-left-radius: 4px;
+          border-top-left-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+     -moz-border-bottom-left-radius: 4px;
+          border-bottom-left-radius: 4px;
+}
+.liens a, .bouton {
+  display: inline-block;
+  margin: 20px 0 20px;
+}
+.bords {
+  border: 1px solid #E66E0D;
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+  padding-left: 20px;
+  padding-bottom: 40px;
+}
+.calageGauche {
+  margin-left: -20px;
+}
+.calageGaucheDroite {
+  margin-left: 10px;
+  margin-right: -20px;
+}
+.wrapper {
+  position: relative;
+  top: 20px;
+}
+.wrapper .parent {
+  pointer-events: none;
+  background: transparent;
+  display: block;
+  margin-right: 20px;
+  height: 30px;
+}
+.wrapper .parent .children {
+  pointer-events: all;
+  cursor: pointer;
+  display: inline-block;
+  margin-left: -20px;
+  position: relative;
+  top: -20px;
+}
+.wrapper .parent:hover {
+	background: rgba(168, 236, 82, 0.6);
+	background: rgba(236, 236, 236, 0.6);
+	width: 100%;
+	display: block;
+}
+#formRecherche {
+  position: relative;
+  top: 2px;
+  height: 60px;
+}
+.entretoise {
+  height: 100%;
+  vertical-align: middle;
+  display: inline-block;
+}
+#recherche {
+  width: 150px;
+  border-right: none;
+  vertical-align: middle;
+  display: inline-block;
+}
+#boutonRecherche {
+  position: relative;
+  top: -2px;
+  display: inline-block;
+  padding: 4px 12px;
+  margin-bottom: 0;
+  font-size: 14px;
+  line-height: 20px;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: #E66E0D;
+  color: #FFFFFF;
+  border: 1px solid #E66E0D;
+  border-bottom-color: #E66E0D;
+  -webkit-border-top-right-radius: 4px;
+     -moz-border-top-right-radius: 4px;
+          border-top-right-radius: 4px;
+  -webkit-border-bottom-right-radius: 4px;
+     -moz-border-bottom-right-radius: 4px;
+          border-bottom-right-radius: 4px;
+}
+#conteneurRecherche {
+  vertical-align: middle;
+  display: inline-block;
+}
+#connexion, inscription {
+  vertical-align: middle;
+  display: inline-block;
+}
+select,
+textarea,
+input[type="text"],
+input[type="password"],
+input[type="datetime"],
+input[type="datetime-local"],
+input[type="date"],
+input[type="month"],
+input[type="time"],
+input[type="week"],
+input[type="number"],
+input[type="email"],
+input[type="url"],
+input[type="search"],
+input[type="tel"],
+input[type="color"],
+.uneditable-input {
+  display: inline-block;
+  height: 20px;
+  padding: 4px 6px;
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 20px;
+  color: #555555;
+  vertical-align: middle;
+  -webkit-border-radius: 0px;
+     -moz-border-radius: 0px;
+          border-radius: 0px;
+}
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.uneditable-input:focus {
+  border-color: rgba(168, 236, 82, 0.8);
+  outline: 0;
+  outline: thin dotted \9;
+  /* IE6-9 */
+
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(168, 236, 82, 0.6);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(168, 236, 82, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(168, 236, 82, 0.6);
+  border-color: rgba(230, 110, 13, 0.8);
+  outline: 0;
+  outline: thin dotted \9;
+  /* IE6-9 */
+
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(230, 110, 13, 0.6);
+     -moz-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(230, 110, 13, 0.6);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 8px rgba(230, 110, 13, 0.6);
+}
+.fos_user_change_password input, .fos_user_profile_edit input {
+	height: 30px;
+}
+
+select {
+  height: 30px;
+}
+input.formudate {
+  width: 58px;
+}
+.formudate select, .formtva {
+  width: 73px;
+  height: 30px;
+}
+.formtva {
+  margin-bottom: 0px;
+}
+textarea.formuarticle {
+  height: 180px;
+}
+input.formucheck {
+  display: inline-block;
+}
+.paddingRight {
+  padding-right: 20px;
+  overflow: hidden;
+}
+.paddingBottom {
+  padding-bottom: 0px;
+  overflow: hidden;
+}
+.padding0 {
+  padding: 0px;
+  overflow: hidden;
+}
+a.lien {
+  text-decoration: none;
+  padding-top: 0px;
+  margin-top: 0px;
+}
+dl.calage {
+  position: relative;
+  left: -70px;
+}
+.margeGauche {
+  margin-left: 20px;
+}
+.margeDroite {
+  margin-right: 20px;
+}
+
+#ecriture {
+	font-family:'thebattlecont';
+	font-size:30px;
+	line-height:35px;
+}
+
+@media (min-width: 768px) and (max-width: 990px) {
+  #champs {
+  	margin: 0;
+    width: 70%;
+  }
+  #champ {
+  	margin-right: 10px;
+  }
+}
+
+@media (min-width: 990px) and (max-width: 1200px) {
+  #champs {
+    width: 70%;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  #bloc {
+    width: 40%;
+  }
+}
+
+@media (max-width: 979px) {
+	#header {
+	  position: relative;
+	  top: -70px;
+	}
+	#entete {
+	  position: relative;
+	  top: -100px;
+	}
+	#formRecherche {
+	  float: right;
+	}
+}
+
+@media (max-width: 400px) {
+	body, table {
+      font-size: 12px;
+	}
+	.bouton, .boutonMiroir {
+	  font-size: 10px;
+	}
+    select,
+	textarea,
+	input[type="text"],
+	input[type="password"],
+	input[type="datetime"],
+	input[type="datetime-local"],
+	input[type="date"],
+	input[type="month"],
+	input[type="time"],
+	input[type="week"],
+	input[type="number"],
+	input[type="email"],
+	input[type="url"],
+	input[type="search"],
+	input[type="tel"],
+	input[type="color"],
+	.uneditable-input {
+	  font-size: 12px;
+	}
+}

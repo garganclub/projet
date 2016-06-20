@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+		<link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}"/>
+		<link rel="stylesheet" href="{{ asset('css/bootstrap-responsive.css') }}"/>
+		<link rel="stylesheet" href="{{ asset('css/style.css') }}"/>
+		<link rel="stylesheet" href="{{ asset('css/font-awesome.css') }}"/>
+        <title>{% block title %}Bienvenue{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body>
+		<script>
+			function fermerConfirmation() {
+				document.getElementById('conteneurInsertConfirmation').style.display = 'none';
+				location.href = "{{ path('membre_finConfirmation') }}";
+			}
+			function bascule() {
+				if(document.getElementById('conteneurInsertProduction').style.display == 'inline-block') {
+					document.getElementById('conteneurInsertProduction').style.display = 'none';
+				}
+				else {
+					document.getElementById('conteneurInsertProduction').style.display = 'inline-block';
+					document.getElementById('conteneurInsertInscription').style.display = 'none';
+					document.getElementById('conteneurInsertConnexion').style.display = 'none';
+				}
+			}
+		</script>
+    	<div id="header" class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container">
+					<button class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse" type="button">
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<div style="text-align:center; cursor:pointer;"><a class="brand" onclick="bascule()">Eat what you kill<br/>production</a></div>
+					<div  class="navbar-form pull-right">
+						<div class="entretoise"></div>
+						{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+							<button class="bouton" id="mon_compte" style="display:inline-block;">mon compte</button>
+							<button class="bouton" id="deconnexion" style="display:inline-block;">déconnexion</button>
+						{% else %}
+							<button class="bouton" id="connexion" style="display:inline-block;">Connexion</button>
+							<button class="bouton" id="inscription" style="display:inline-block;">Inscription</button>
+						{% endif %}
+					</div>
+				</div>
+			</div>
+			{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+				{% include 'AccueilBundle:Modules:menuConnecte.html.twig' %}
+			{% else %}
+				{% include 'AccueilBundle:Modules:menu.html.twig' %}
+			{% endif %}
+			<div class="bords paddingRight offset1 span4" id="conteneurInsertProduction" style="display:none; background:#FFFFFF; position:relative; left:-2px;">
+				<div style="text-align:left; padding:0px; margin-top:10px;"><i class="icon-remove" style="cursor:pointer;" onclick="bascule()"></i></div><br/>
+				<p><strong style="text-align:center;">Réalisation sous Symfony 2</strong></p>
+				<br/>
+				<p>
+					&nbsp;&nbsp;- Customisation de FOSUserBundle (gestion de la connection sécurisée des utilisateurs),
+					pour l'affichage en ajax des formulaires dans des modales accessibles à partir de chaque pages du site,
+					avec redirection sur celles-ci après confirmation par mail de l'inscription.
+				</P>
+				<p>
+					&nbsp;&nbsp;- Upload d'images avec gestion pour chaque utilisateur de son dossier images.
+					Adaptation du CRUD (Create, Read, Update, Delete) pour la gestion du type 'file', ainsi que
+					le contrôle en php du contenu du dossier pour éviter l'écrasement des images.
+					L'utilisateur peut éditer à chaque instant ses images qui se retrouvent dans la bibliothèque
+					du site, s'il efface une image, elle n'est plus disponible mais reste archivée pour l'affichage
+					des anciens messages du mur.
+					Pour voir le fonctionnement avec du contenu, se connecter avec login monsieur, mot de passe momo.
+				</P>
+				<p>
+					&nbsp;&nbsp;- Gestion drag and drop dynamique des images de la bibliothèque.
+				</P>
+				<p>
+					&nbsp;&nbsp;- Adaptation en ajax du bundle 'KnpPaginator'.
+				</P>
+			</div>
+			<div id="conteneurInsertConnexion" style="text-align:center; display:none;">
+				<br/><br/>
+				<div id="infosConnexion"></div>
+				<div id="cibleConnexion" style="background:#EEEEFF; display:inline-block;"></div>
+			</div>
+			<div id="conteneurInsertInscription" style="text-align:center; display:none;">
+				<div id="infosInscription"></div>
+				<div id="cibleInscription" style="background:#EEEEFF; display:inline-block;"></div>
+			</div>
+			<div id="conteneurInsertConfirmation" style="text-align:center; inline-block;">
+				{% if app.session.get('retour').message is defined %}
+					<br/><br/>
+					<div id="cibleConfirmation" style="background:#EEEEFF; display:inline-block;">
+						<div class="container" style="display:inline-block; width:400px;">
+							<div style="text-align:left; padding:20px;"><i class="icon-remove" style="cursor:pointer;" onclick="fermerConfirmation()"></i></div>
+							<br/>
+							<h2 style="background:#FFFFFF; display:inline-block;">Confirmation <i class="icon-thumbs-up"></i></h2>
+							<br/>
+							<div class="liens paddingRight bords" style="background:#FFFFFF; display:inline-block; margin:20px 20px 40px 20px; padding-bottom:20px;">
+								<br/>
+								<div style="display:inline-block;">{{ app.session.get('retour').message }}</div>
+							</div>
+						</div>
+					</div>
+				{% endif %}
+			</div>
+		</div>
+		<script src="{{ asset('js/jquery-2.1.4/jquery-2.1.4.min.js') }}"></script>
+		<script src="{{ asset('js/bootstrap.js') }}"></script>
+		{% block body %}{% endblock %}
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<script>
+				$(document).ready(function() {
+					$('#mon_compte').on('click', function() {
+						location.href="{{ path('fos_user_profile_show') }}";
+					});
+					$('#deconnexion').on('click', function() {
+						location.href="{{ path('fos_user_security_logout') }}";
+					});
+				});
+			</script>
+		{% else %}
+			<script>
+				$(document).ready(function() {
+					$('#connexion').on('click', function() {
+						document.getElementById('conteneurInsertInscription').style.display = 'none';
+						document.getElementById('conteneurInsertConfirmation').style.display = 'none';
+						document.getElementById('conteneurInsertProduction').style.display = 'none';
+						document.getElementById('conteneurInsertConnexion').style.display = 'block';
+						$.ajax({
+							type: "POST",
+							url: "{{ path('membre_connexion') }}",
+							success: function(returnData){
+								$('#cibleConnexion').html(returnData['html']);
+							}
+						});
+					});
+					$('#inscription').on('click', function() {
+						document.getElementById('conteneurInsertConnexion').style.display = 'none';
+						document.getElementById('conteneurInsertConfirmation').style.display = 'none';
+						document.getElementById('conteneurInsertProduction').style.display = 'none';
+						document.getElementById('conteneurInsertInscription').style.display = 'block';
+						$.ajax({
+							type: "POST",
+							url: "{{ path('membre_inscription') }}",
+							success: function(returnData){
+								$('#cibleInscription').html(returnData['html']);
+							}
+						});
+					});
+				});
+			</script>
+		{% endif %}
+		{% block javascripts %}{% endblock %}
+	</body>
+</html>

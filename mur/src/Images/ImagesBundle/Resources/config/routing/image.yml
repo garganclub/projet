@@ -1,0 +1,38 @@
+images:
+    path:     /
+    defaults: { _controller: "ImagesBundle:Image:index" }
+    
+images_listes:
+    path:     /imagesAjax
+    defaults: { _controller: "ImagesBundle:Image:ajax" }
+
+images_show:
+    path:     /{id}/{page}/show
+    defaults: { _controller: "ImagesBundle:Image:show" }
+
+images_new:
+    path:     /new
+    defaults: { _controller: "ImagesBundle:Image:new" }
+
+images_create:
+    path:     /create
+    defaults: { _controller: "ImagesBundle:Image:create" }
+    requirements: { _method: post }
+
+images_edit:
+    path:     /{id}/{page}/edit
+    defaults: { _controller: "ImagesBundle:Image:edit" }
+
+images_update:
+    path:     /{id}/{page}/update
+    defaults: { _controller: "ImagesBundle:Image:update" }
+    requirements: { _method: post|put }
+
+images_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "ImagesBundle:Image:delete" }
+    requirements: { _method: post|delete }
+    
+images_effacer:
+    path:     /{id}/effacer
+    defaults: { _controller: "ImagesBundle:Image:effacer" }

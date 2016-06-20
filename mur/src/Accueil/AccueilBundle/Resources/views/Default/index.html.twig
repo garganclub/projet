@@ -1,0 +1,33 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+	<div id="entete" style="margin-top:41px;">
+		<input type="hidden" id="localisation" name="localisation" value="{{ app.request.uri }}"/>
+		{% for flashMessage in app.session.flashbag.get('warning') %}
+			<div class="alert alert-warning" style="text-align:center;"><i class="icon-warning-sign"></i>&nbsp;{{ flashMessage }}</div>
+		{% endfor %}
+	</div>
+	<div class="container">
+		<div class="row">
+			<div id="entete" class="span12" style="margin-bottom:-33px;">
+				<img src = "{{ asset('images/accueil.png') }}" style="margin:0px; padding:0px;"/>
+			</div>
+		</div>
+		<div style="background:rgba(0, 0, 0, 0.5); position:relative; top:-610px; text-align:center; padding:20px; color:#FFFFFF;">
+			<strong>Bienvenue,</strong>
+			<br/><br/>
+			<p>
+				On vous invite à tester vos talents de grapheur sur le mur virtuel,
+				<br/>
+				vous pouvez taguer un message,
+				bomber un dessin en choisissant parmi la bibliothèque partagée,
+				<br/>
+				uploader vos propres images si vous vous
+				connectez.
+				<br/>
+				Toutes les images implémentées sont des photos de tags lyonnais.
+				<br/>
+				Remerciements à http://www.devandclick.fr et http://www.dafont.com
+			</p>
+		</div>
+	</div>
+{% endblock %}

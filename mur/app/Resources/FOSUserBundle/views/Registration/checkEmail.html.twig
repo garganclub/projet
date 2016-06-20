@@ -1,0 +1,17 @@
+{% extends "FOSUserBundle::layout.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block fos_user_content %}
+<div id="envoidemail" style="display:inline-block; width:400px;">
+	{% for flashMessage in app.session.flashbag.get('success') %}
+		<div class="alert alert-success">{{ flashMessage }}</div>
+	{% endfor %}
+	<h2 style="background:#FFFFFF; display:inline-block;">Requête en cours <i class="icon-cog"></i></h2>
+	<br/><br/>
+	<div class="bords" style="padding-right:20px; padding-bottom:30px; margin-bottom:20px; width:300px; background:#FFFFFF; display:inline-block;">
+		<br/>
+		{{ 'registration.check_email'|trans({'%email%': user.email}) }}
+	</div>
+</div>
+{% endblock fos_user_content %}

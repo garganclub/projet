@@ -1,0 +1,36 @@
+<div class="liens paddingBottom bords" style="display:inline-block;">
+	<a style="margin-top:15px;" href="{{ path('images_new') }}">Importer<br/>une image</a>
+	<br/>
+	<table>
+		<tr>
+			{% set compteur = 0 %}
+			{% for entity in entities %}
+				{% if ((compteur % 4 == 0) and (compteur != 0)) %}
+					</tr><tr>
+				{% endif %}
+				<td class="paddingRight" style="text-align:center; padding-top:10px; padding-bottom:10px;">
+					{{ entity.affiche }}
+					<br/>
+					{% if page is not defined %}
+						{% set page = 1 %}
+					{% endif %}
+					<a href="{{ path('images_show', { 'id': entity.id, 'page' : page }) }}" title="voir"><i class="icon-eye-open"></i></a>&nbsp;
+					<a href="{{ path('images_edit', { 'id': entity.id, 'page' : page }) }}" title="modifier"><i class="icon-edit"></i></a>&nbsp;
+					<a href="{{ path('images_effacer', { 'id': entity.id }) }}" title="effacer"><i class="icon-trash"></i></a>&nbsp;
+					<br/>
+				</td>
+				<td>
+					<a href="{{ path('images_show', { 'id': entity.id, 'page' : page }) }}"  title="voir">
+						<img src = "{{ ('uploads/'~entity.adresse)|imagine_filter('miniature') }}"/>
+					</a>
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				</td>
+				{% set compteur = compteur + 1 %}
+			{% endfor %}
+		</tr>
+	</table>
+</div>
+<div class="navigation">
+	{{ knp_pagination_render(entities) }}
+</div>

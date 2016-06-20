@@ -1,0 +1,17 @@
+# This file is auto-generated during the composer install
+parameters:
+    database_driver: pdo_mysql
+    database_host: XXXXXXXXXXX
+    database_port: null
+    database_name: integration
+    database_user: XXXXXXXXXXX
+    database_password: XXXXXXXXXXX
+    mailer_transport: XXXXXXXXXXX
+    mailer_encryption: XXXXXXXXXXX
+    mailer_port: XXXXXXXXXXX
+    mailer_auth_mode: XXXXXXXXXXX
+    mailer_host: XXXXXXXXXXX
+    mailer_user: XXXXXXXXXXX
+    mailer_password: XXXXXXXXXXX
+    locale: fr
+    secret: XXXXXXXXXXX

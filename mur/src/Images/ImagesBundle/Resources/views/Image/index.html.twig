@@ -1,0 +1,37 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+	<div class="container" style="margin-top:40px; margin-bottom:-40px;">
+		<div class="row">
+			<div id="entete" class="span12">
+				<h2>Liste des images <i class="icon-list"></i></h2>
+				<div id="pageListe" style="display:inline-block; vertical-align:top;">
+					{% if page is not defined %}
+						{% set page = 1 %}
+					{% endif %}
+					<script>
+						function ajaxPaginator(cible) {
+							$.ajax({
+								type: "GET",
+								url: "{{ path('images_listes') }}",
+								data: {page: cible.attr('data-info')},
+								success: function(returnData){
+									$('#pageListe').html(returnData['html']);
+								}
+							});
+						}
+						$(document).ready(function() {
+							$.ajax({
+								type: "GET",
+								url: "{{ path('images_listes') }}",
+								data: {page: {{ page }}},
+								success: function(returnData){
+									$('#pageListe').html(returnData['html']);
+								}
+							});
+						});
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}

@@ -1,0 +1,23 @@
+{% extends "::base.html.twig" %}
+{% block body %}
+	<style>
+		#mur {
+			background:url("{{ asset('images/texture_mur-72.jpg') }}");
+			dislay:inline-block;
+		}
+	</style>
+	<input type="hidden" id="localisation" name="localisation" value="{{ app.request.uri }}"/>
+	<div id="mur" style="padding-left:40px; padding-bottom:100px; padding-top:20px; margin-top:10px; margin-bottom:-40px;">
+		<br/>
+		{% for tag in tags %}
+			{% if tag.message.messageAdresse != '' %}
+				<div style="display:inline-block;">
+					<img src="{{ asset('uploads/'~tag.message.messageAdresse) }}"/>
+				</div>
+			{% endif %}
+			{% if tag.message.messageTexte != '' %}
+				{{ tag.message.messageTexte|raw }}
+			{% endif %}
+		{% endfor %}
+	</div>
+{% endblock %}

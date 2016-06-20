@@ -1,0 +1,40 @@
+{% extends '::base.html.twig' %}
+{% block body %}
+    <div class="container" style="margin-top:40px;">
+		<div class="row">
+			<div id="entete" class="span12">
+				<h2>Vue de l'image <i class="icon-desktop"></i></h2>
+				<script>
+					function retour() {
+						document.getElementById('parametre').submit();
+					}
+				</script>
+				{% if page is not defined %}
+					{% set page = 1 %}
+				{% endif %}
+				<form id="parametre" action="{{ path('images') }}" method="post">
+					<input type="hidden" name="page" value="{{ page }}"/>
+				</form>
+				<div class="liens paddingBottom paddingRight bords" style="display:inline-block">
+					<table>
+						<tr style="padding:20px;">
+							<td class="paddingRight" style="vertical-align:top; padding-top:20px;">
+								{{ entity.affiche }}
+								<br/>
+								<a href="#" onclick="retour()">Retour liste</a>
+								<br/>
+								<a href="{{ path('images_edit', { 'id': entity.id, 'page' : page }) }}" style="margin-top:0px;">Éditer</a>
+								<br/>
+								<a href="{{ path('images_new') }}" style="margin-top:0px;">Nouvelle entrée</a>
+								<br/>
+							</td>
+							<td style="padding:20px 0px 20px 20px;">
+								<img src = "{{ asset('uploads/'~entity.adresse) }}"/>	
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock %}
